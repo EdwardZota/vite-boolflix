@@ -1,6 +1,6 @@
 <script>
 export default {
-    name:'SingleFilm',
+    name:'SingleItem',
     props:{
         title:String,
         originalTitle:String,
@@ -36,10 +36,8 @@ export default {
             this.imageApi=baseImageApi+this.image;
         },
         valutation(){
-            let numberOfStars=0;
             let none = 5;
             for(let i =0; i < this.vote ;i++){
-                numberOfStars++;
                 none--
                 this.star+='<i class="fa-solid fa-star"></i>';
             }

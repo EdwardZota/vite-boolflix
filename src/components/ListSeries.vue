@@ -1,11 +1,11 @@
 <script>
     import {store} from '../store.js';
-    import SingleSeries from './SingleSeries.vue';
+    import SingleItem from './SingleItem.vue';
 
     export default {
         name:'ListSeries',
         components:{
-            SingleSeries
+            SingleItem
         },
         data(){
             return{
@@ -18,11 +18,12 @@
 <template>
     <h3 v-if="store.allSeries.length>0">Lista Serie TV</h3>
     <div class="box" v-for="(serie,i) in store.allSeries" :key="i">
-        <SingleSeries
+        <SingleItem
             :title="serie.name"
             :originalTitle="serie.original_name"
             :language="serie.original_language"
-            :vote="serie.vote_average"
+            :vote="Math.floor(serie.vote_average / 2)"
+            :image="seriebackdrop_path"
         />
     </div>
 </template>
