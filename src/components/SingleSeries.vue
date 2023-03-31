@@ -15,7 +15,9 @@ export default {
     <div class="SingleSerie">
         <h1>{{ title }}</h1>
         <h2>{{ originalTitle }}</h2>
-        <span>{{ language }}</span>
+        <span>
+            {{ language }}
+        </span>
         <h6>{{ vote }}</h6>
     </div>
   
