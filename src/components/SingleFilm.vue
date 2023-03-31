@@ -5,11 +5,14 @@ export default {
         title:String,
         originalTitle:String,
         language:String,
-        vote:Number
+        vote:Number,
+        image:String
     },
     data(){
         return{
-            flag:''
+            flag:'',
+            imageApi:'',
+            star:'',
         }
     },
     methods:{
@@ -27,20 +30,40 @@ export default {
             }else{
                 this.flag=this.language;
             }
+        },
+        getImage(){
+            let baseImageApi='https://image.tmdb.org/t/p/w342';
+            this.imageApi=baseImageApi+this.image;
+        },
+        valutation(){
+            let numberOfStars=0;
+            let none = 5;
+            for(let i =0; i < this.vote ;i++){
+                numberOfStars++;
+                none--
+                this.star+='<i class="fa-solid fa-star"></i>';
+            }
+            for(let i=0;i<none;i++){
+                this.star+='<i class="fa-regular fa-star"></i>';
+            }
         }
     },
     created(){
         this.getFlag();
+        this.getImage();
+        this.valutation();
     }
 }
 </script>
 
 <template>
     <div class="SingleFilm">
+        <div><img :src="imageApi">
+        </div>
         <h1>{{ title }}</h1>
         <h2>{{ originalTitle }}</h2>
         <span v-html="flag"></span>
-        <h6>{{ vote }}</h6>
+        <h6 v-html="star"></h6>
     </div>
   
 </template>
