@@ -23,7 +23,7 @@
             :originalTitle="serie.original_name"
             :language="serie.original_language"
             :vote="Math.floor(serie.vote_average / 2)"
-            :image="seriebackdrop_path"
+            :image="serie.backdrop_path"
         />
     </div>
 </template>
