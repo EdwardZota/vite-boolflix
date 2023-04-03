@@ -3,3 +3,41 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+body {
+    background: linear-gradient(90deg,red, orange, yellow, green, blue, indigo, violet,indigo,blue, green,yellow,orange,red, red); 
+    background-size: 1000% 100%;  
+    animation: rainbow-gradient 60s ease infinite;
+}
+  
+@keyframes rainbow-gradient{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 100%}
+    100%{background-position:0% 50%}
+
+}
+
+main{
+    width: 90%;
+    margin: 10px auto;
+}
+h3{
+    font-size: 40px;
+}
+.container{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    .box{
+        width: calc(100% / 6 - 20px);
+        height: 400px;
+        margin-bottom: 50px;
+    }
+    .flag{
+        width: 50px;
+        display: inline-block;
+        img{
+            width: 100%;
+        }
+    }
+}

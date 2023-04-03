@@ -23,9 +23,9 @@
       getListFilmAndSeries(){
         let generalApi='https://api.themoviedb.org/3/search';
         
-        let filmApi = generalApi + '/movie?api_key=16e130c582a04e3f9d34867e76eb82b1';
+        let filmApi = generalApi + '/movie?api_key=16e130c582a04e3f9d34867e76eb82b1&language=it-IT';
 
-        let seriesApi = generalApi +'/tv?api_key=16e130c582a04e3f9d34867e76eb82b1';
+        let seriesApi = generalApi +'/tv?api_key=16e130c582a04e3f9d34867e76eb82b1&language=it-IT';
 
         if(store.searchText.length>0){
           filmApi +=`&query=${store.searchText}`;
@@ -50,6 +50,7 @@
   <MyHeader @SearchItem="getListFilmAndSeries"/>
 
   <main>
+    <h3 v-if="store.allFilm.length==0">Per visualizzare i film scrivi nella barra di ricerca</h3>
     <ListFilm/>
 
     <ListSeries/>
