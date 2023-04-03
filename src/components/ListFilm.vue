@@ -1,4 +1,5 @@
 <script>
+    import axios from 'axios';
     import {store} from '../store.js';
     import SingleItem from './SingleItem.vue';
 
@@ -11,6 +12,18 @@
             return{
                 store
             }
+        },
+        methods:{
+            getCastItem(id){
+                if(this.store.allCast.length>0){
+                    this.store.allCast=[];
+                }
+                
+                axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=16e130c582a04e3f9d34867e76eb82b1`)
+                .then(response =>{
+                    this.store.allCast=response.data.cast;
+            })
+        }
         }
     }
 </script>
@@ -19,7 +32,7 @@
     <div>
         <h3 v-if="store.allFilm.length>0">Lista Film</h3>
         <div class="container">
-            <div class="box" v-for="(film,i) in store.allFilm" :key="i">
+            <div class="box" v-for="(film,i) in store.allFilm" :key="i" @click="getCastItem(film.id)">
                 <SingleItem 
                     :title="film.title"
                     :originalTitle="film.original_title"
@@ -27,15 +40,15 @@
                     :vote="Math.floor(film.vote_average / 2)"
                     :image="film.poster_path"
                     :overview="film.overview"
+                    :genres="film.genre_ids"
                 />
             </div>
         </div>
     </div>
     
-    
 </template>
 
 <style lang="scss" scoped>
-    
+
 
 </style>

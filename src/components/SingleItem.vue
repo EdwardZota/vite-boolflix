@@ -1,4 +1,6 @@
 <script>
+import {store} from '../store.js';
+
 export default {
     name: 'SingleItem',
     props: {
@@ -7,13 +9,17 @@ export default {
         language: String,
         vote: Number,
         image: String,
-        overview:String
+        overview:String,
+        genres:Array
     },
     data() {
         return {
             flag: '',
             imageApi: '',
             star: '',
+            store,
+            visible:false,
+            itemGenres:[],
         }
     },
     methods: {
@@ -45,6 +51,27 @@ export default {
             for (let i = 0; i < none; i++) {
                 this.star += '<i class="fa-regular fa-star"></i>';
             }
+        },
+        isVisible(){
+            if(this.visible=false){
+                this.visible=true;
+            }else{
+                this.visible=false;
+            }
+        },
+        convertGenres(){
+            if(this.itemGenres.length>0){
+                this.itemGenres=[];
+            }
+            for(let i=0;i<this.genres.length;i++){
+                let codeGenre=this.genres[i];
+                
+                for(let i=0;i<this.store.allGenres.length;i++){
+                    if(codeGenre==this.store.allGenres[i].id){
+                        this.itemGenres.push(this.store.allGenres[i].name);
+                    }
+                }
+            }
         }
     },
     created() {
@@ -56,13 +83,29 @@ export default {
 </script>
 
 <template>
-    <div class="SingleFilm">
+    <div class="SingleFilm" @click="convertGenres()">
         <img class="cover" :src="imageApi">
-        <h1 v-if="title.length>0" class="title">{{ title }}</h1>
-        <h2 v-else class="originalTitle">{{ originalTitle }}</h2>
-        <span class="flag" v-html="flag"></span>
-        <h6 class="stars" v-html="star"></h6>
-        <p>{{ overview }}</p>
+        <div class="info">
+            <h1 v-if="title.length>0" class="title">{{ title }}</h1>
+            <h2 v-else class="originalTitle">{{ originalTitle }}</h2>
+            <span class="flag" v-html="flag"></span>
+            <h6 class="stars" v-html="star"></h6>
+            <p>{{ overview }}</p>
+            
+        </div>
+        <div class="castingAndGenres" v-if="visible" @click="isVisible()">
+            <div class="box">
+                <h3>Genere</h3>
+                <ul class="genresList">
+                    <li v-for="(genre,i) in itemGenres" :key="i">{{i+1}}- {{ genre }}</li>
+                </ul>
+                <h3>Attori</h3>
+                <ul class="castingList">
+                    <li v-for="(people,i) in store.allCast.slice(0,5)" :key="i">{{i+1}}-{{ people.name }}</li>
+                </ul>
+                <button class="croice" @click="isVisible()">x</button>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -77,17 +120,57 @@ export default {
     .cover {
         width: 100%;
         height: 100%;
-        transition: transform 1s, height 2.5s;
+        transition: all 1s;
+    }
+    & .info{
+        transition: all 1s;
+        padding: 30px;
+        height: 100%;
     }
     .stars{
         font-size: 30px;
         color: #ff0;
     }
-    &:hover{
-        & .cover{
-            transform: translate(-0%,-100%);
-            height: 0;
+    &:hover .cover,&:hover .info{
+        transform: translate(-0%,-100%);
+    }
+}
+.castingAndGenres{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba($color: black, $alpha: 0.7);
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .box{
+        width: 50%;
+        height: 50%;
+        background-color: black;
+        color: white;
+        border-radius: 30px;
+        border: 3px solid white;
+        box-shadow: 0 0 20px 20px white;
+        text-align: left;
+        padding: 25px;
+        position: relative;
+        overflow-y: hidden;
+        ul li{
+            list-style: none;
+            font-size: 20px;
         }
+    }
+    button{
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-size: 30px;
+        color: white;
+        background-color: transparent;
+        border: none;
     }
 }
 

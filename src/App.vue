@@ -45,9 +45,14 @@
             this.store.allSeries=response.data.results;
           })
         }
-
       }
-    }
+      },
+      created(){
+        axios.get('https://api.themoviedb.org/3/genre/movie/list?api_key=16e130c582a04e3f9d34867e76eb82b1')
+          .then(response => {
+            this.store.allGenres=response.data.genres;
+          })
+      }
   }
 </script>
 
