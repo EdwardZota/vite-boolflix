@@ -53,7 +53,7 @@ export default {
             }
         },
         isVisible(){
-            if(this.visible=false){
+            if(this.visible==false){
                 this.visible=true;
             }else{
                 this.visible=false;
@@ -83,7 +83,7 @@ export default {
 </script>
 
 <template>
-    <div class="SingleFilm" @click="convertGenres()">
+    <div class="SingleFilm" @click="convertGenres(),isVisible()">
         <img class="cover" :src="imageApi">
         <div class="info">
             <h1 v-if="title.length>0" class="title">{{ title }}</h1>
@@ -93,7 +93,7 @@ export default {
             <p>{{ overview }}</p>
             
         </div>
-        <div class="castingAndGenres" v-if="visible" @click="isVisible()">
+        <div class="castingAndGenres" v-if="visible">
             <div class="box">
                 <h3>Genere</h3>
                 <ul class="genresList">
@@ -103,7 +103,6 @@ export default {
                 <ul class="castingList">
                     <li v-for="(people,i) in store.allCast.slice(0,5)" :key="i">{{i+1}}-{{ people.name }}</li>
                 </ul>
-                <button class="croice" @click="isVisible()">x</button>
             </div>
         </div>
     </div>
@@ -155,22 +154,13 @@ export default {
         border: 3px solid white;
         box-shadow: 0 0 20px 20px white;
         text-align: left;
-        padding: 25px;
+        padding: 50px 30px;
         position: relative;
         overflow-y: hidden;
         ul li{
             list-style: none;
             font-size: 20px;
         }
-    }
-    button{
-        position: absolute;
-        top: 20px;
-        right: 30px;
-        font-size: 30px;
-        color: white;
-        background-color: transparent;
-        border: none;
     }
 }
 
