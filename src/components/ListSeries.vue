@@ -37,8 +37,8 @@
 
 <style lang="scss" scoped>
 .container .box{
-    width: 300px;
-    height: 180px;
+    width: calc(100% / 4 - 20px);
+    height: 250px;
     
 }
 

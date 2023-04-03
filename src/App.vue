@@ -21,6 +21,11 @@
     },
     methods:{
       getListFilmAndSeries(){
+
+        if(this.store.allFilm.length>0 || this.store.allSeries.length>0){
+          this.store.allFilm=[];
+          this.store.allSeries=[];
+        }
         let generalApi='https://api.themoviedb.org/3/search';
         
         let filmApi = generalApi + '/movie?api_key=16e130c582a04e3f9d34867e76eb82b1&language=it-IT';

@@ -26,12 +26,12 @@ h3{
 }
 .container{
     display: flex;
-    justify-content: space-around;
+
     flex-wrap: wrap;
     .box{
         width: calc(100% / 6 - 20px);
         height: 400px;
-        margin-bottom: 50px;
+        margin: 10px 10px 50px 10px;
     }
     .flag{
         width: 50px;

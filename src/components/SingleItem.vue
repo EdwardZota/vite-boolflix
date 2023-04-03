@@ -57,20 +57,12 @@ export default {
 
 <template>
     <div class="SingleFilm">
-        <div class="flip-card" tabIndex="0">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <img class="cover" :src="imageApi">
-                </div>
-                <div class="flip-card-back">
-                    <h1 v-if="title.length>0" class="title">{{ title }}</h1>
-                    <h2 v-else class="originalTitle">{{ originalTitle }}</h2>
-                    <span class="flag" v-html="flag"></span>
-                    <h6 class="stars" v-html="star"></h6>
-                    <p>{{ overview }}</p>
-                </div>
-            </div>
-        </div>
+        <img class="cover" :src="imageApi">
+        <h1 v-if="title.length>0" class="title">{{ title }}</h1>
+        <h2 v-else class="originalTitle">{{ originalTitle }}</h2>
+        <span class="flag" v-html="flag"></span>
+        <h6 class="stars" v-html="star"></h6>
+        <p>{{ overview }}</p>
     </div>
 </template>
 
@@ -80,58 +72,23 @@ export default {
     height: 92%;
     text-align: center;
     overflow: hidden;
+    background-color: black;
+    color: white;
     .cover {
         width: 100%;
+        height: 100%;
+        transition: transform 1s, height 2.5s;
     }
     .stars{
         font-size: 30px;
         color: #ff0;
     }
-    p{
-        color: white;
+    &:hover{
+        & .cover{
+            transform: translate(-0%,-100%);
+            height: 0;
+        }
     }
 }
 
-
-.flip-card {
-    background-color: black;
-    width: 100%;
-    height: 100%;
-    perspective: 1000px;
-}
-
-.flip-card-inner {
-    width: 100%;
-    height: 100%;
-    transition: transform 1s;
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-}
-
-.flip-card:focus {
-    outline: 0;
-}
-
-.flip-card:hover .flip-card-inner,.flip-card:focus .flip-card-inner{
-    transform: rotateY(180deg);
-}
-
-.flip-card-front,.flip-card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-}
-
-.flip-card-front {
-    z-index: 2;
-}
-
-.flip-card-back {
-    background-color: black;
-    color: white;
-    transform: rotateY(180deg);
-    z-index: 1;
-    padding: 20px;
-}
 </style>
