@@ -27,6 +27,7 @@
                     :vote="Math.floor(serie.vote_average / 2)"
                     :image="serie.backdrop_path"
                     :overview="serie.overview"
+                    :genres="serie.genre_ids"
                 />
             </div>
         </div>
