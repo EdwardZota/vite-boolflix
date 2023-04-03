@@ -5,14 +5,12 @@
 
   import MyHeader from './components/MyHeader.vue';
   import ListFilm from './components/ListFilm.vue';
-  import ListSeries from './components/ListSeries.vue';
 
 
   export default {
     components:{
       MyHeader,
-      ListFilm,
-      ListSeries
+      ListFilm
     },
     data(){
       return{
@@ -60,10 +58,9 @@
   <MyHeader @SearchItem="getListFilmAndSeries"/>
 
   <main>
-    <h3 v-if="store.allFilm.length==0">Per visualizzare i film scrivi nella barra di ricerca</h3>
+    <h3 v-if="store.allFilm.length==0 && store.allSeries.length==0">Per visualizzare i film scrivi nella barra di ricerca</h3>
     <ListFilm/>
 
-    <ListSeries/>
   </main>
   
 </template>

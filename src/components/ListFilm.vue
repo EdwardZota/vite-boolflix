@@ -44,11 +44,30 @@
                 />
             </div>
         </div>
+        <h3 v-if="store.allSeries.length>0">Lista Serie TV</h3>
+        <div class="container">
+            <div class="box series" v-for="(serie,i) in store.allSeries" :key="i" @click="getCastItem(serie.id)">
+                <SingleItem
+                    :title="serie.name"
+                    :originalTitle="serie.original_name"
+                    :language="serie.original_language"
+                    :vote="Math.floor(serie.vote_average / 2)"
+                    :image="serie.backdrop_path"
+                    :overview="serie.overview"
+                    :genres="serie.genre_ids"
+                />
+            </div>
+        </div>
+
     </div>
     
 </template>
 
 <style lang="scss" scoped>
-
+.container .box.series{
+    width: calc(100% / 4 - 20px);
+    height: 250px;
+    
+}
 
 </style>
