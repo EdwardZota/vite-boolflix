@@ -23,7 +23,14 @@
                 .then(response =>{
                     this.store.allCast=response.data.cast;
             })
-        }
+            },
+            selectorArrayFilm(){
+                if(this.store.filmFiltered==""){
+                    return this.store.allFilm;
+                }else{
+                    return this.store.filmFiltered;
+                }
+            }
         }
     }
 </script>
@@ -32,7 +39,7 @@
     <div>
         <h3 v-if="store.allFilm.length>0">Lista Film</h3>
         <div class="container">
-            <div class="box" v-for="(film,i) in store.allFilm" :key="i" @click="getCastItem(film.id)">
+            <div class="box" v-for="(film,i) in selectorArrayFilm()" :key="i" @click="getCastItem(film.id)" >
                 <SingleItem 
                     :title="film.title"
                     :originalTitle="film.original_title"

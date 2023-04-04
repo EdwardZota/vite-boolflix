@@ -18,9 +18,18 @@
         <div class="logo">
             <span>BOOLFLIX</span>
         </div>
-        <div class="searchbar">
-            <input type="text" placeholder="Che film vuoi cercare?" @keyup.enter="$emit('SearchItem')" v-model="store.searchText">
-            <button @click="$emit('SearchItem')">Cerca</button>
+        <div id="rightNav">
+            <div class="genere">
+                <label for="generi">Scegli un genere:</label>
+                <select name="generi" v-model="store.selectorGenere">
+                    <option value="">All</option>
+                    <option v-for="(genere ,i) in store.allGenres" :key="i" :value="genere.name">{{ genere.name }}</option>
+                </select>
+            </div>
+            <div class="searchbar">
+                <input type="text" placeholder="Che film vuoi cercare?" @keyup.enter="$emit('SearchItem')" v-model="store.searchText">
+                <button @click="$emit('SearchItem')">Cerca</button>
+            </div>
         </div>
     </div>
     
@@ -43,10 +52,9 @@
         font-weight: bolder;
         transform: skew(-30deg);
     }
-    .searchbar{
+    .searchbar,.genere{
         width: 400px;
         transform: skew(-20deg);
-        background-color: linear-gradient(305deg, tomato, gold, cyan);
 
         input{
             width: 70%;
@@ -65,7 +73,7 @@
                 outline: none;
             }
         }
-        button{
+        button,option,label{
             width: 30%;
             border: none;
             background-color: black;
@@ -75,4 +83,19 @@
         }
 
     }
+    #rightNav{
+        width: 800px;
+        display: flex;
+    }
+    select{
+        outline: none;
+        border: none;
+        background-color: red;
+        font-size: 25px;
+        font-weight: bolder;
+        height: 48px;
+        text-align: center;
+        
+    }
+
 </style>

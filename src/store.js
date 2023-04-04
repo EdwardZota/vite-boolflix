@@ -6,4 +6,7 @@ export const store = reactive({
     allGenres:[],
     allCast:[],
     searchText:'',
+    selectorGenere:"",
+    filmFiltered:[],
+    serieFiltered:[],
 })

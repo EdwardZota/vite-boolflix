@@ -43,6 +43,28 @@
             this.store.allSeries=response.data.results;
           })
         }
+      },
+      filterToGenres(){
+        this.store.filmFiltered=[];
+        if(this.store.selectorGenere != ""){
+
+          for(let i =0;i < this.store.allGenres.length;i++){
+            if(this.store.selectorGenere==this.store.allGenres[i].name){
+              let selectorAsNumber=this.store.allGenres[i].id;
+  
+              for(let i=0;i<this.store.allFilm.length;i++){
+                if(this.store.allFilm[i].genre_ids.includes(selectorAsNumber)){
+                  this.store.filmFiltered.push(this.store.allFilm[i]);
+                }
+              }
+              for(let i=0;i<this.store.allSeries.length;i++){
+                if(this.store.allSeries[i].genre_ids.includes(selectorAsNumber)){
+                  this.store.serieFiltered.push(this.store.allSeries[i]);
+                }
+              }
+            }
+          }
+        }
       }
       },
       created(){
@@ -55,7 +77,7 @@
 </script>
 
 <template>
-  <MyHeader @SearchItem="getListFilmAndSeries"/>
+  <MyHeader @SearchItem="getListFilmAndSeries" @change="filterToGenres"/>
 
   <main>
     <h3 v-if="store.allFilm.length==0 && store.allSeries.length==0">Per visualizzare i film scrivi nella barra di ricerca</h3>
