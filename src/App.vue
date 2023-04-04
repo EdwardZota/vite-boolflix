@@ -46,6 +46,7 @@
       },
       filterToGenres(){
         this.store.filmFiltered=[];
+        this.store.serieFiltered=[];
         if(this.store.selectorGenere != ""){
 
           for(let i =0;i < this.store.allGenres.length;i++){
@@ -59,6 +60,8 @@
               }
               for(let i=0;i<this.store.allSeries.length;i++){
                 if(this.store.allSeries[i].genre_ids.includes(selectorAsNumber)){
+                  this.store.serieFiltered.push(this.store.allSeries[i]);
+                }else if((selectorAsNumber == 28 || selectorAsNumber == 12) && this.store.allSeries[i].genre_ids.includes(10759)){
                   this.store.serieFiltered.push(this.store.allSeries[i]);
                 }
               }

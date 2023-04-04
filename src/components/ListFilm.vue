@@ -1,4 +1,4 @@
-<script>
+<script >
     import axios from 'axios';
     import {store} from '../store.js';
     import SingleItem from './SingleItem.vue';
@@ -30,6 +30,13 @@
                 }else{
                     return this.store.filmFiltered;
                 }
+            },
+            selectorArraySeries(){
+                if(this.store.filmFiltered==""){
+                    return this.store.allSeries;
+                }else{
+                    return this.store.serieFiltered;
+                }
             }
         }
     }
@@ -53,7 +60,7 @@
         </div>
         <h3 v-if="store.allSeries.length>0">Lista Serie TV</h3>
         <div class="container">
-            <div class="box series" v-for="(serie,i) in store.allSeries" :key="i" @click="getCastItem(serie.id)">
+            <div class="box series" v-for="(serie,i) in selectorArraySeries()" :key="i" @click="getCastItem(serie.id)">
                 <SingleItem
                     :title="serie.name"
                     :originalTitle="serie.original_name"
