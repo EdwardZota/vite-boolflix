@@ -43,6 +43,7 @@
             this.store.allSeries=response.data.results;
           })
         }
+        this.store.searchText='';
       },
       filterToGenres(){
         this.store.filmFiltered=[];
@@ -53,16 +54,16 @@
             if(this.store.selectorGenere==this.store.allGenres[i].name){
               let selectorAsNumber=this.store.allGenres[i].id;
   
-              for(let i=0;i<this.store.allFilm.length;i++){
-                if(this.store.allFilm[i].genre_ids.includes(selectorAsNumber)){
-                  this.store.filmFiltered.push(this.store.allFilm[i]);
+              for(let c=0;c<this.store.allFilm.length;c++){
+                if(this.store.allFilm[c].genre_ids.includes(selectorAsNumber)){
+                  this.store.filmFiltered.push(this.store.allFilm[c]);
                 }
               }
-              for(let i=0;i<this.store.allSeries.length;i++){
+              for(let c=0;c<this.store.allSeries.length;c++){
                 if(this.store.allSeries[i].genre_ids.includes(selectorAsNumber)){
-                  this.store.serieFiltered.push(this.store.allSeries[i]);
-                }else if((selectorAsNumber == 28 || selectorAsNumber == 12) && this.store.allSeries[i].genre_ids.includes(10759)){
-                  this.store.serieFiltered.push(this.store.allSeries[i]);
+                  this.store.serieFiltered.push(this.store.allSeries[c]);
+                }else if((selectorAsNumber == 28 || selectorAsNumber == 12) && this.store.allSeries[c].genre_ids.includes(10759)){
+                  this.store.serieFiltered.push(this.store.allSeries[c]);
                 }
               }
             }
